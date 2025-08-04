@@ -8,7 +8,7 @@ $manifest = array(
     'acceptable_sugar_flavors' => array('CE'),
     'acceptable_sugar_versions' => array(
         'exact_matches' => array(),
-        'regex_matches' => array('6\\.5\\.[0-9]$'),
+        'regex_matches' => array('6\\.5\\.[0-9]$', '7\\.[0-9]\\.[0-9]$', '8\\.[0-9]\\.[0-9]$'),
     ),
     'is_uninstallable' => true,
     'published_date' => date('Y-m-d H:i:s'),

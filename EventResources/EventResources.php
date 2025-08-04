@@ -3,7 +3,7 @@ if (!defined('sugarEntry') || !sugarEntry) {
     die('Not A Valid Entry Point');
 }
 
-class EventResources extends Basic
+class EventResources extends SugarBean
 {
     public $new_schema = true;
     public $module_dir = 'EventResources';

@@ -5,6 +5,9 @@ if (!defined('sugarEntry') || !sugarEntry) {
 
 // Execute the SQL script to create the tables
 $sqlFile = 'modules/EventResources/install/install.sql';
+$basePath = realpath(dirname(__FILE__) . '/../../');
+$altSqlFile = $basePath . '/EventResources/install/install.sql';
+
 if (file_exists($sqlFile)) {
     $sql = file_get_contents($sqlFile);
     $db = DBManagerFactory::getInstance();
@@ -19,8 +22,22 @@ if (file_exists($sqlFile)) {
     }
     
     echo "EventResources tables created successfully.<br>";
+} else if (file_exists($altSqlFile)) {
+    $sql = file_get_contents($altSqlFile);
+    $db = DBManagerFactory::getInstance();
+    
+    // Split the SQL file into individual statements
+    $sqlStatements = explode(';', $sql);
+    foreach ($sqlStatements as $statement) {
+        $statement = trim($statement);
+        if (!empty($statement)) {
+            $db->query($statement);
+        }
+    }
+    
+    echo "EventResources tables created successfully using alternative path.<br>";
 } else {
-    echo "Error: SQL file not found at $sqlFile<br>";
+    echo "Error: SQL file not found at $sqlFile or $altSqlFile<br>";
 }
 
 // Add the module to the navigation menu
